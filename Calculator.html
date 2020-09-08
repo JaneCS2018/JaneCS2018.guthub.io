@@ -1,0 +1,208 @@
+<html>
+<head>
+<link href="style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<!-- jQuery and Popper.js  -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+<!-- JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div id="container">
+
+<div id="header1">
+<div class='logo'>
+	<a  href="index.html">Xiang Liu</a>
+	<p class="smalltext">WEB DEVELOPER</p>
+</div>
+
+
+<div class='title'>Calculator
+
+	<!-- <div class="HorizLinks">
+		<ul>
+		<li><a href="http://www.website.com"></a>REGRESSION	/	</li>
+		<li><a href="http://www.website.com"></a>ANN	/	</li>
+		<li><a href="http://www.website.com">DEEP LEARNING	/	</a></li>
+		<li><a href="http://www.website.com">COMPUTER VISION</a></li>
+		</ul>
+	</div> -->
+
+</div>
+
+<!-- <p>Header Text</p> -->
+
+
+</div>
+
+
+
+<div id="horizontalnav">
+
+	<div class="navlinks">
+
+	<ul>
+	<li><a href="index.html">HOME</a></li>
+	<li><a href="Triangle.html">TRIANGLE</a></li>
+	<li><a href="Temperature.html">TEMPERATURE</a></li>
+	<li><a href="Calculator.html">CALCULATOR</a></li>
+
+	</div>
+
+</div>
+
+
+
+
+<div id="leftnav"></div>
+
+<div id="rightnav"></div>
+
+<div id="body">
+	
+	<div class="converter">
+		<div class="row">
+			<div class="col-lg-5">
+				<div class="form-check-inline">
+				  <label class="form-check-label">
+				    <input type="radio" class="form-check-input" name="optradio" value="0" checked>Simple Interest
+				  </label>
+				</div>
+			</div>
+			<div class="col-lg-5">
+				<div class="form-check-inline">
+				  <label class="form-check-label">
+				    <input type="radio" class="form-check-input" name="optradio" value="1">Compound Interest (By year)
+				  </label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<section>
+		<form id="calculation" onsubmit="return false;">
+		  <div class="form-row">
+		    <div class="col-md-4">
+		      <label for="validationServer01">Principal $</label>
+		      <input type="number" class="form-control" id="validationServer01" min="0" name="number" step="any" required data-bind="value:replyNumber" placeholder="Please Enter Principal">
+		    </div>
+		    <div class="col-md-4">
+		      <label for="validationServer01">@Apr (%)</label>
+		      <input type="number" class="form-control" id="validationServer02" min="0" name="number" step="any" required data-bind="value:replyNumber" placeholder="Please Enter Interest Rate %">
+		    </div>
+		    <div class="col-md-4">
+		    	<label for="validationServer01">Duration(By Year)</label>
+		    	<div>
+					<select id="duration">
+						<option value="None" selected>----- Select Year -----</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+				</div>
+		   </div>
+		  </div>  
+		  <div id="feedback"></div> 
+		  <div class="answer" id="answer">
+		  	<table id='tbl' class="table"></table>
+			
+		  </div>
+		  <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+		  <button class="btn btn-warning" type="submit"  onClick="refreshPage()">Refresh</button>
+		</form>
+	</section>
+</div>
+<script>
+	//add table function
+	function addCell(tr, val) {
+    var td = document.createElement('td');
+
+    td.innerHTML = val;
+
+    tr.appendChild(td)
+    }
+
+
+	  function addRow(tbl, val_1, val_2, val_3) {
+	    var tr = document.createElement('tr');
+
+	    addCell(tr, val_1);
+	    addCell(tr, val_2);
+	    addCell(tr, val_3);
+
+	    tbl.appendChild(tr)
+   }
+
+	$('#calculation').submit(function(){
+
+		var ra = document.getElementsByName('optradio'); 
+		var p = document.getElementById("validationServer01").value;
+		var r = document.getElementById("validationServer02").value;
+		var d = document.querySelector('#duration'); 
+        var t = Number(d.value);
+
+		//table ID
+		tbl = document.getElementById('tbl');	
+
+			if (ra[0].checked){
+
+					addRow(tbl, 'Year', 'Interest', 'Total Amount  (principle+interest)');
+						 	
+				    for(var i=1; i<t+1; i++){
+				      addRow(tbl, i, (p*r/100*i).toFixed(2), (Number(p)+Number(p*r/100*i)).toFixed(2));
+				    }
+						 	
+			     
+			}
+			else if(ra[1].checked) {
+				   console.log("hello");
+				   addRow(tbl, 'Year', 'Interest', 'Total Amount  (principle+interest)');
+				   for(var j=1; j<t+1; j++){
+				   	  // var total = Math.pow((1+r/100), i)*p
+				      addRow(tbl, j, (Math.pow((1+r/100), j)*p-p).toFixed(2), (Math.pow((1+r/100), j)*p).toFixed(2));
+				      // p = Math.pow((1+r/100), j)*p
+				    }
+			
+	        }
+	        else{
+	        document.getElementById('feedback').innerHTML ="Plese select simple or compound"; 	
+	        }
+		});
+
+	function refreshPage(){
+    	window.location.reload();
+	} 
+
+
+    
+</script>
+
+<div id="footer1">
+	<div id= "bottom" class="row row-cols-4  row-cols-lg-4  row-cols-sm-4 row-cols-xs-4 row-cols-md-4">
+			<div class='col bottom_link'><a href="index.html">HOME</a></div>
+			<div class='col bottom_link'><a href="Triangle.html">TRIANGLE</a></div>
+			<div class='col bottom_link'><a href="Temperature.html">TEMPERATURE</a></div>
+			<div class='col bottom_link'><a href="Calculator.html">CALCULATOR</a></div>
+	
+	</div>	
+	
+</div>
+
+</div>
+
+
+</body>
+</html>

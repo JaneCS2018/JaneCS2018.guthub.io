@@ -1,0 +1,167 @@
+<html>
+<head>
+<link href="style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<!-- jQuery and Popper.js  -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+<!-- JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div id="container">
+
+<div id="header">
+<div class='logo'>
+	<a  href="index.html">Xiang Liu</a>
+	<p class="smalltext">WEB DEVELOPER</p>
+</div>
+
+
+<div class='title'>Triangle Area Calculation
+
+	<!-- <div class="HorizLinks">
+		<ul>
+		<li><a href="http://www.website.com"></a>REGRESSION	/	</li>
+		<li><a href="http://www.website.com"></a>ANN	/	</li>
+		<li><a href="http://www.website.com">DEEP LEARNING	/	</a></li>
+		<li><a href="http://www.website.com">COMPUTER VISION</a></li>
+		</ul>
+	</div> -->
+
+</div>
+
+<!-- <p>Header Text</p> -->
+
+
+</div>
+
+
+
+<div id="horizontalnav">
+
+	<div class="navlinks">
+
+	<ul>
+	<li><a href="index.html">HOME</a></li>
+	<li><a href="Triangle.html">TRIANGLE</a></li>
+	<li><a href="Temperature.html">TEMPERATURE</a></li>
+	<li><a href="Calculator.html">CALCULATOR</a></li>
+
+	</div>
+
+</div>
+
+
+
+
+<div id="leftnav"></div>
+
+<div id="rightnav"></div>
+
+<div id="body">
+	<div class="box">
+		Please enter three triangle sides A, B, C
+		<div class="box_small">* Make sure the sum of two sides is bigger than the third side</div>
+	</div>
+
+	<section>
+		<form id="calculation" onsubmit="return false;">
+		  <div class="form-row">
+		    <div class="col-md-4 mb-3">
+		      <label for="validationServer01">Side A</label>
+		      <input type="number" class="form-control" id="validationServer01" min="0" name="number" step="any" required data-bind="value:replyNumber" placeholder="Please Enter Side A">
+		      
+		    </div>
+		    <div class="col-md-4 mb-3">
+		      <label for="validationServer02">Side B</label>
+		      <input type="number" class="form-control" id="validationServer02" min="0" name="number" step="any" required data-bind="value:replyNumber" placeholder="Please Enter Side B">
+		      
+		    </div>
+		    <div class="col-md-4 mb-3">
+		      <label for="validationServer03">Side C</label>
+		      <input type="number" class="form-control" id="validationServer03" min="0" name="number" step="any" required data-bind="value:replyNumber" placeholder="Please Enter Side C">
+		    
+		    </div>
+		  </div> 
+		  <div id="feedback"></div> 
+		  <div class="answer" id="answer"></div>
+		  <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+		  <button class="btn btn-warning" type="submit"  onClick="refreshPage()">Refresh</button>
+		</form>
+		
+	</section>
+</div>
+<script>
+	$('#calculation').submit(function(){
+
+		var a=parseInt(document.getElementById('validationServer01').value);
+		var b=parseInt(document.getElementById('validationServer02').value);
+		var c=parseInt(document.getElementById('validationServer03').value);
+		var sum=Math.pow(a, 2)+Math.pow(b, 2)-Math.pow(c, 2)
+		var res = Math.sqrt(sum*0.5)*0.5*c; 
+		var area = "and the area is: "+ res.toFixed(2) + " square units";
+		var Rightangle1= "and the area is: "+ a*b*0.5 + " square units";
+		var Rightangle2= "and the area is: "+ b*c*0.5 + " square units";
+		var Rightangle3= "and the area is: "+ c*a*0.5 + " square units";
+
+
+			  if ((a==0)|| (b==0) || (c==0)){
+			  	document.getElementById('answer').innerHTML ="The sides "+ a +" , "+ b +" , "+ c +  " can't form a regular trangle, please enter the number again ! ";
+			  }
+
+			  else if ((a+b<c) || (a+c<b) || (b+c<a)){
+			  document.getElementById('feedback').innerHTML = "Please make sure the sum of two sides is bigger than the third side !";
+			  }
+
+
+			 else if ((a==b)&&(a==c)&&(b==c) && (a!=0)){
+			  	document.getElementById('answer').innerHTML ="The sides "+ a +" , "+ b +" , "+ c +  " form a equilateral "+"<br>"+ area;
+			  }
+
+			 else if ((a==b) || (a==c) || (b==c)){
+			    document.getElementById('answer').innerHTML ="The sides "+ a +" , "+ b +" , "+ c +  " form a isosceles " + "<br>"+ area;  
+			 }
+
+			 else if (Math.pow(a,2)+Math.pow(b,2)==Math.pow(c,2)){
+				    document.getElementById('answer').innerHTML ="The sides "+ a +" , "+ b +" , "+ c +  " form a rightangle "+ "<br>"+ Rightangle1;
+			}
+			 else if (Math.pow(b,2)+Math.pow(c,2)==Math.pow(a,2)){
+			    document.getElementById('answer').innerHTML ="The sides "+ a +" , "+ b +" , "+ c +  " form a rightangle "+"<br>"+ Rightangle2;
+			}
+			 else if (Math.pow(a,2)+Math.pow(c,2)==Math.pow(b,2)){
+				    document.getElementById('answer').innerHTML ="The sides "+ a +" , "+ b +" , "+ c +  " form a rightangle "+"<br>"+ Rightangle3;
+			}
+
+			else {
+			document.getElementById('answer').innerHTML ="The sides "+ a +" , "+ b +" , "+ c +  " form a regular triangle "+"<br>"+ area; 
+	        }
+		});
+
+	function refreshPage(){
+    	window.location.reload();
+	} 
+
+
+    
+</script>
+
+<div id="footer">
+	<div id= "bottom" class="row row-cols-4  row-cols-lg-4  row-cols-sm-4 row-cols-xs-4 row-cols-md-4">
+			<div class='col bottom_link'><a href="index.html">HOME</a></div>
+			<div class='col bottom_link'><a href="Triangle.html">TRIANGLE</a></div>
+			<div class='col bottom_link'><a href="Temperature.html">TEMPERATURE</a></div>
+			<div class='col bottom_link'><a href="Calculator.html">CALCULATOR</a></div>
+	
+	</div>	
+	
+</div>
+
+</div>
+
+
+</body>
+</html>
