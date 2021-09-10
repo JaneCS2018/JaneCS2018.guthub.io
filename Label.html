@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Label</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
+</head>
+<style>
+    body{
+        font-family: 'Open Sans';
+        font-weight: 700;
+        padding-left: 2vw;
+        padding-bottom: 10vh;
+
+    }
+    #Warning{
+        width: 100%;
+    }
+    #error{
+        margin-top:2vh;
+        color: red;
+        font-weight: bold;
+    }
+    .error{
+        color: red;
+    }
+    .subtitle{
+        margin-top: 1vh;;
+        color:rgb(0, 3, 192);
+        font-size: 1em;
+    }
+    #clear{
+        margin-left: 1vw;
+    }
+    #cert_img{
+        position: relative;
+        margin-top: 2vw;
+        border: 1px gray;
+        border-style: dashed;
+        border-radius: 15px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 287px;
+        height: 172.8px;
+        font-family: "Arial Narrow", Arial, sans-serif;
+    }
+    
+    #Title_card, .sub, #PartNumber_card,
+    #Electrical_card, #Optical_card{
+        font-size: 8.6px;
+        margin-left: 5px;
+        line-height: 1.1;
+    }
+    #PartNumber_card,
+    #Electrical_card, #Optical_card{
+        padding-left: 5px;
+    }
+    #Title_card{
+        padding-top: 3px;
+    }
+    #Warning_card{
+        font-size: 6.5px;
+        margin-left: 5px;
+        margin-right: 5px;
+        line-height: 1;
+        margin-bottom: 2px;
+        margin-top: 1px;
+        text-align: justify;
+ 
+    }
+    #ref{
+        margin-top: 2vw;
+        background-image: url("ref.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 287px;
+        height: 172.8px;
+    }
+    .address_full{
+        position: absolute;
+        top:133px;
+        width:100%;
+        display: flex;
+        padding-left: 5px;
+        
+    }
+    
+    .address{
+        font-size: 6px;
+        line-height: 0.9;
+        width:90px;
+        
+    }
+   .address_full div:nth-child(2){
+      padding-right:4px;
+
+   }
+   .address_full div:nth-child(3){
+      position: absolute;
+      right: 6px;     
+   }
+    #logo{
+        position: absolute;
+        right: 7px;
+    }
+    #cert{
+        position: absolute;
+        right: 3px;
+        top:25px;
+    }
+    #china{
+        position: absolute;
+        bottom: 3px;
+        right:8px;
+        font-size: 6px;
+    }
+   
+    .sub span{
+        font-size: 5.5px;
+    }
+    .sub strong{
+        font-size: 6.7px;
+        font-weight: bold;
+    }
+    .KJ_Fonts_title{
+        font-family: source-han-serif-korean, serif;
+        font-size: 5px;
+        font-weight: bold;  
+    }
+
+    .text_ko{
+        font-size: 5.5px;
+    }
+    .KJ_Fonts_Warning{
+        font-family: source-han-serif-korean, serif;
+        font-weight: bold;
+        font-size: 5px;
+    }
+    .KJ_Fonts_address{
+        font-family: source-han-serif-korean, serif;
+        font-size: 4.9px;
+        font-weight: bold; 
+    }
+    #china .KJ_Fonts_address{
+        font-size: 4.9px;
+    }
+</style>
+<body>
+    <div>
+        <label for="">Family:
+            <select name="Family" id="Family" onchange='doThisOnChangeFa(this.value)'>
+                <option value="" disabled hidden selected>select</option>
+                <option value="V2M">V2M</option>
+                <option value="V2L" >V2L</option>
+            </select>
+        </label>
+        <label for="">Mounting:
+            <select name="Mounting" id="Mounting" onchange='doThisOnChangeMount(this.value)'>
+                <option value="" disabled hidden selected>select</option>
+                <option value="X39" >X39</option>
+                <option value="E40">E40</option>
+                <option value="FIX">FIX</option>
+                <option value="FEU">FEU</option>
+            </select>
+        </label>
+        <label for="">Power:
+            <select name="Power" id="Power"  onchange='doThisOnChangePower(this.value)'>
+                <option value="" disabled hidden selected>select</option>
+                <option value=105>105</option>
+                <option value=150>150</option>
+                <option value=165>165</option>
+            </select>
+        </label>
+        <label for="">CRI:
+            <select name="CRI" id="CRI" onchange='doThisOnChangeCRI(this.value)'>
+                <option value="" disabled hidden selected>select</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+                <option value="A" >A</option>
+            </select>
+        </label>
+        <label for="">CCT:
+            <select name="CCT" id="CCT" onchange='doThisOnChangeCCT(this.value)'>
+                <option value="" disabled hidden selected>select</option>
+                <option value=27 >2700K</option>
+                <option value=30 >3000K</option>
+                <option value=35 >3500K</option>
+                <option value=40 >4000K</option>
+                <option value=50 >5000K</option>
+                <option value=56 >5600K</option>
+            </select>
+        </label>
+        <label for="">Driver:
+            <select name="Driver" id="Driver" onchange='doThisOnChangeDriver(this.value)'>
+                <option value="" disabled hidden selected>select</option>
+                <option value="VL" >VL</option>
+                <option value="VH" >VH</option>
+            </select>
+        </label>
+        <button onclick="Submit()">Submit</button>
+        <button onclick="Clear()" id="clear">Clear All</button>
+        <div id="error"></div>
+        <div class="content">
+            <div class="subtitle">Title:</div>
+            <span id="Title"></span>
+        </div>
+        <div>
+            <div class="subtitle">Part Number:</div>
+            <span id="Part"></span>
+        </div>
+        <div>
+            <div class="subtitle">Product Code:</div>
+            <span id="Code"></span>
+        </div>
+        <div>
+            <div class="subtitle">Electrical Input:</div>
+            <span id="Electrical"></span>
+        </div>
+        <div>
+            <div class="subtitle">Optical Output:</div>
+            <span id="Optical"></span>
+        </div>
+        <br>
+        <div>
+            <div class="subtitle">Warning:</div>
+            <div id="Warning"></div>
+        </div>
+        <div>
+            <div class="subtitle">Certification:</div>
+            <div>
+                <img id="Certification" width=250></img>
+            </div>
+        </div>
+        <br>
+        <br>
+        <button onclick="generatePDF()">Download Product Label PDF</button>
+        <br>
+        <div id="cert_img">
+            <div id="logo"><img src="Logo.svg"></div>
+            <div id="cert"></div>
+            <div id="Title_card" class="sub"></div>
+            <div class="sub">Part# <strong>(de Pieza, <span>부품, 部品</span>)</strong></div>
+            <div id="PartNumber_card"></div>
+            <div class="sub">Electrical Input: <strong>(Entrada de Electricidad, <span>정격입력, 電気入力</span>)</strong></div>
+            <div id="Electrical_card"></div>
+            <div class="sub">Optical Input: <strong>(Salida óptica, <span>광출력, 光出力</span>)</strong></div>
+            <div id="Optical_card"></div>
+            <div id="Warning_card"></div>
+            <div class="address_full">
+                <div class="address">
+                    FILAMENTO USA:
+                    www.Filamento.com<br>
+                    (+1) 408-475-0038<br>
+                    2445 Augustine Drive, Suite 150, Santa Clara, CA 95054, USA
+                </div>
+                <div class="address">
+                    FILAMENTO Mexico:
+                    Importado por services and ingenieria, LT, SC.
+                    Direccion: Chatines 78 Cp: 02459 Col. Tezozomoc  (+52) 55 44261914
+                    RFC: sil120301bc1 
+                </div>
+                <div class="address Korea_address">
+                    FILAMENTO Korea: <span class="KJ_Fonts_address">공급처: ㈜세미백아이엔
+                    씨​써비스센터 연락처 제조자:불산</span>HuaQuan
+                    <span class="KJ_Fonts_address">전기조명</span>CO.,LTD.HU11458 -18001A<span class="KJ_Fonts_address">(안전인
+                    증번호)</span><br>(+82) 031-591-318 LTD.
+                </div>
+            </div>
+            <div class="sub" id="china">Made In China Hecho en China <span class="KJ_Fonts_address">중국산</span></div>
+
+        </div>
+        <div></div>
+        <!-- <div id="ref"></div> -->
+    </div>
+    <script src="function.js"></script>
+    <script src="excel.js"></script>
+</body>
+</html>
